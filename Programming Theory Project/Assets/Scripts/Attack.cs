@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public int playerAttackPower = 10;
-    public int enemyAttackPower = 8;
-    public int playerHealth = 100;
-    public int enemyHealth = 100;
+    private GameObject obstacle;
+
+    private int obstacleHealth;
+
+    private void Start()
+    {
+    }
+
 
     // Calculate Damage
     int CalculateDamage(int attackPower, int defense)
@@ -16,24 +20,20 @@ public class Attack : MonoBehaviour
     }
 
     // Player AttackEnemy
-    public void PlayerAttack()
+    public void PlayerAttack(int playerAttackPower, Enemy targetEnemy)
     {
-        int damage = CalculateDamage(playerAttackPower, 0); // 假设敌人没有防御
-        enemyHealth -= damage;
-        Debug.Log("敌人受到 " + damage + " 点伤害，剩余生命值：" + enemyHealth);
+        if(targetEnemy != null){    
+            int damage = CalculateDamage(playerAttackPower, 0);
+            targetEnemy.TakeDamage(damage);
+            Debug.Log("Enemy took " + damage + " damage, remaining health: " + targetEnemy.Health);
+        }
     }
 
     // Enemy Attack Player
-    public void EnemyAttack()
+    public void EnemyAttack(int enemyAttackPower)
     {
-        int damage = CalculateDamage(enemyAttackPower, 0); // 假设玩家没有防御
-        playerHealth -= damage;
-        Debug.Log("玩家受到 " + damage + " 点伤害，剩余生命值：" + playerHealth);
-    }
-
-        // Update is called once per frame
-    void Update()
-    {
-        
+        int damage = CalculateDamage(enemyAttackPower, 0);
+        Obstacle.Instance.ObstacleHealth -= damage;
+        Debug.Log("Player took " + damage + " damage, remaining health: " + Obstacle.Instance.ObstacleHealth);
     }
 }
