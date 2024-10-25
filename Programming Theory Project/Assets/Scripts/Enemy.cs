@@ -74,7 +74,13 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(int damage){
         health -= damage;
         if(health <= 0){
-            Destroy(gameObject);
+            SwitchAnimation("Dead");
+            StartCoroutine(DeadRoutine());
         }
+    }
+
+    IEnumerator DeadRoutine(){
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }
