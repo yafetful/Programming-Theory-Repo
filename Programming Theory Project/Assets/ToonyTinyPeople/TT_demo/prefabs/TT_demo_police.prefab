@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8619338778009177163}
   - component: {fileID: 8619338777999598093}
+  - component: {fileID: 6104091618427918937}
   - component: {fileID: 1579472377857919532}
   m_Layer: 0
   m_Name: TT_demo_police
@@ -143,7 +144,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 3.54, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8619338778009177583}
@@ -171,6 +172,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6104091618427918937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619338778009079851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b44d21244f7f4b669f704a5d5fdc409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1579472377857919532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5565acb0c92284073be1e998c71414ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4152935488268841621, guid: 1e014bb2124f643e682b10d6f7004d13, type: 3}
+  bulletRedPrefab: {fileID: 3226370655445237354, guid: 3bbfacf3fedd6422cab0d15828f434fa, type: 3}
+  fireEffect: {fileID: 3199346384015752365, guid: 307229a5540374aae98859caad2128a3, type: 3}
+  firePoint: {fileID: 0}
+  isGameAlive: 0
 --- !u!1 &8619338778009079855
 GameObject:
   m_ObjectHideFlags: 0

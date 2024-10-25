@@ -5,43 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject bulletRedPrefab;
+    public ParticleSystem fireEffect;
     public Transform firePoint;
-
-    private bool isShooting;
     private const float standSpeed = 0.5f;
     private const float moveSpeed = 2.0f;
-    private int playerAttackPower = 10;
-
-    private Attack attack;
     private Animator animator;
+
+    public bool isGameAlive;
 
     void Start()
     {
         // Initialize the player
         animator = GetComponent<Animator>();
-        attack = GetComponent<Attack>();
         transform.position = new Vector3(0, 0, 25); // Set the player's initial position
         StartCoroutine(MoveToPosition(new Vector3(0, 0, 40), 3.0f)); // Move the player to the initial position
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (isGameAlive)
         {
-            isShooting = true;
-            animator.SetBool("isShooting", isShooting);
-            // GameObject targetEnemy = GetTargetEnemy();
-            // if (targetEnemy != null)
-            // {
-            //     Enemy zombieComponent = targetEnemy.GetComponent<Enemy>();
-            //     attack.PlayerAttack (playerAttackPower, zombieComponent);
-            // }
-            Shoot();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isShooting = false;
-            animator.SetBool("isShooting", isShooting);
+            HandleInput();
         }
     }
 
@@ -49,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 startPosition = transform.position;
         float elapsed = 0;
-        SwitchSpeed (moveSpeed);
+        SwitchSpeed(moveSpeed);
         while (elapsed < duration)
         {
             transform.position =
@@ -58,25 +43,50 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         transform.position = target;
-        SwitchSpeed (standSpeed);
+        SwitchSpeed(standSpeed);
+        isGameAlive = true;
     }
 
     private void SwitchSpeed(float speed)
     {
         animator.SetFloat("Speed", speed);
     }
+    IEnumerator GunMuzzle()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("isShooting", false);
+    }
 
-    private void Shoot(){
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        if (bulletComponent != null){
-            GameObject targetEnemy = GetTargetEnemy();
-            if (targetEnemy != null){
-                bulletComponent.ShootTowards(targetEnemy.transform.position);
-            }
+    private void TryShoot(GameObject bulletType)
+    {
+        if (true)
+        {
+            animator.SetBool("isShooting", true);
+            Shoot(bulletType);
         }
     }
 
+    private void Shoot(GameObject bulletType)
+    {
+        GameObject targetEnemy = GetTargetEnemy();
+        if (targetEnemy != null)
+        {
+            bool isDead = targetEnemy.GetComponent<Enemy>().isDead;
+            if (!isDead)
+            {
+                Instantiate(fireEffect, firePoint.position, firePoint.rotation);
+                GameObject bullet = Instantiate(bulletType, firePoint.position, firePoint.rotation);
+                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                Transform targetTransform = targetEnemy.GetComponent<Enemy>().centerPoint;
+                bulletComponent.ShootTowards(targetTransform);
+                StartCoroutine(GunMuzzle());
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
     GameObject GetTargetEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
@@ -84,14 +94,27 @@ public class PlayerController : MonoBehaviour
         float minDistance = Mathf.Infinity;
         foreach (GameObject enemy in enemies)
         {
+            bool isDead = enemy.GetComponent<Enemy>().isDead;
             float distance =
                 Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < minDistance)
+            if (distance < minDistance && !isDead)
             {
                 targetEnemy = enemy;
                 minDistance = distance;
             }
         }
         return targetEnemy;
+    }
+    private void HandleInput()
+    {
+        switch (Input.inputString)
+        {
+            case "1":
+                TryShoot(bulletPrefab);
+                break;
+            case "2":
+                TryShoot(bulletRedPrefab);
+                break;
+        }
     }
 }

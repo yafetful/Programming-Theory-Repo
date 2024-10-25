@@ -1,23 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+[RequireComponent(typeof (Attack))]
+public abstract class Bullet : MonoBehaviour
 {
-    public float speed = 1000f;
+    public ParticleSystem explosionEffect;
+    protected float speed;
+    protected int damage;
+    [SerializeField]
+    protected float coolingTime;
     private Rigidbody rb;
+    private Attack attack;
 
-    void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody component not found on bullet.");
-        }
-
+        attack = GetComponent<Attack>();
     }
 
-    public void ShootTowards(Vector3 target)
+    public float GetCoolingTime
+    {
+        get
+        {
+            return coolingTime;
+        }
+    }
+
+    public void ShootTowards(Transform target)
     {
         if (rb == null)
         {
@@ -25,7 +36,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 direction = (target - transform.position).normalized;
+        Vector3 direction = (target.position - transform.position).normalized;
         rb.velocity = direction * speed; 
     }
 
@@ -33,7 +44,9 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-            other.GetComponent<Enemy>().TakeDamage(10);
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Enemy enemy = other.GetComponent<Enemy>();
+            attack.PlayerAttack(damage,enemy);
             Destroy(gameObject);
         }
     }

@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    private GameObject obstacle;
-
-    private int obstacleHealth;
-
-    private void Start()
-    {
-    }
-
 
     // Calculate Damage
     int CalculateDamage(int attackPower, int defense)
