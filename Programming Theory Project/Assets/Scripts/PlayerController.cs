@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         animator.SetBool("isShooting", false);
     }
-
+    // ABSTRACTION
     private void TryShoot(GameObject bulletType)
     {
         
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Bullet is cooling down.");
         }
     }
-
+    // ABSTRACTION
     private void Shoot(GameObject bulletType)
     {
         GameObject targetEnemy = GetTargetEnemy();
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    // ABSTRACTION
     GameObject GetTargetEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
