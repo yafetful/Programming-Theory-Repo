@@ -365,6 +365,7 @@
 "Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/SlowZmobie.cs"
 "Assets/Scripts/SpawnManager.cs"
+"Assets/Scripts/UIMenu.cs"
 "Assets/Scripts/Zmobie.cs"
 "Assets/Supercyan Character Pack Zombie Sample/Scripts/ZombieCameraLogic.cs"
 "Assets/Supercyan Character Pack Zombie Sample/Scripts/ZombieCharacterControl.cs"
