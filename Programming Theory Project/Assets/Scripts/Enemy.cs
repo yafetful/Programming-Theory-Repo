@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     public bool isDead = false;
     public Transform centerPoint;
 
-    // Start is called before the first frame update
+    // INHERITANCE
     protected virtual void Awake()
     {
         attack = GetComponent<Attack>();
@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
         animator.SetFloat("MoveSpeed", speed);
 
     }
-
+    // ENCAPSULATION
     public int Health
     {
         get

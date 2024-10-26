@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Zmobie : Enemy
 {
+    // INHERITANCE
     protected override void Awake(){
         base.Awake();
         speed = 1.5f;

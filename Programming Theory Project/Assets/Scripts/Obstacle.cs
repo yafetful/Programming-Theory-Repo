@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
 {
     public static Obstacle Instance { get; private set; }
     private int obstacleHealth = 100;
-
+    // ENCAPSULATION
     public int ObstacleHealth
     {
         get { return obstacleHealth; }
