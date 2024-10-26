@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs;
-    private float spawnInterval = 2.0f;
+    private float spawnInterval = 3.0f;
     private float minRangeX = -6f;
     private float maxRangeX = 8f;
-    private float positionZ = 89f;
+    private float positionZ = 85.0f;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0, spawnInterval);
+        InvokeRepeating(nameof(SpawnEnemy), 0, spawnInterval);
     }
     void SpawnEnemy()
     {

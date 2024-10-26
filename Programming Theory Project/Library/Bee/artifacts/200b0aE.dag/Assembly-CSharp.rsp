@@ -361,6 +361,8 @@
 "Assets/Scripts/Obstacle.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/RedZmobie.cs"
+"Assets/Scripts/ScoreDisplay.cs"
+"Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/SlowZmobie.cs"
 "Assets/Scripts/SpawnManager.cs"
 "Assets/Scripts/Zmobie.cs"

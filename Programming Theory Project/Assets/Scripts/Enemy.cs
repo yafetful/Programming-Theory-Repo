@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected Attack attack;
 
+    protected int scoreValue;
     [SerializeField]
     protected float speed;
     [SerializeField]
@@ -88,8 +89,10 @@ public abstract class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            ScoreManager.instance.AddScore(scoreValue);
             SwitchAnimation("Dead");
             StartCoroutine(DeadRoutine());
+            Debug.Log("Enemy is dead." + scoreValue);
         }
     }
 

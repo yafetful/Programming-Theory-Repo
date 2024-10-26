@@ -9,5 +9,6 @@ public class SlowZmobie : Enemy
         speed = 0.8f;
         health = 100;
         attackPower = 10;
+        scoreValue = 10;
     }
 }

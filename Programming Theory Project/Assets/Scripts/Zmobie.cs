@@ -9,5 +9,6 @@ public class Zmobie : Enemy
         speed = 1.5f;
         health = 200;
         attackPower = 5;
+        scoreValue = 40;
     }
 }

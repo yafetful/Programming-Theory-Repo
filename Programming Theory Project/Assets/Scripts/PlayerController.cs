@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private const float standSpeed = 0.5f;
     private const float moveSpeed = 2.0f;
     private Animator animator;
-    public ColdDownManager coldDownManager;
+    private ColdDownManager coldDownManager;
 
     public bool isGameAlive;
 

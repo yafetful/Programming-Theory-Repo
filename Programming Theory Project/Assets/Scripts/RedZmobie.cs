@@ -9,5 +9,6 @@ public class RedZmobie : Enemy
         speed = 1f;
         health = 150;
         attackPower = 20;
+        scoreValue = 20;
     }
 }
