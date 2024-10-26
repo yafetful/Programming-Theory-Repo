@@ -9,6 +9,5 @@ public class BullerRed : Bullet
         base.Awake();
         speed = 50f;
         damage = 100;
-        coolingTime = 1f;
     }
 }

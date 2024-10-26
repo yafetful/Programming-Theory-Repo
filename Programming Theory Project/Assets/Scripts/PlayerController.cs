@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private const float standSpeed = 0.5f;
     private const float moveSpeed = 2.0f;
     private Animator animator;
+    public ColdDownManager coldDownManager;
 
     public bool isGameAlive;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize the player
         animator = GetComponent<Animator>();
+        coldDownManager = GetComponent<ColdDownManager>();
         transform.position = new Vector3(0, 0, 25); // Set the player's initial position
         StartCoroutine(MoveToPosition(new Vector3(0, 0, 40), 3.0f)); // Move the player to the initial position
     }
@@ -59,10 +61,15 @@ public class PlayerController : MonoBehaviour
 
     private void TryShoot(GameObject bulletType)
     {
-        if (true)
+        
+        if (!coldDownManager.IsBulletCooling(bulletType))
         {
             animator.SetBool("isShooting", true);
             Shoot(bulletType);
+            coldDownManager.RegisterBullet(bulletType);
+        }else
+        {
+            Debug.Log("Bullet is cooling down.");
         }
     }
 

@@ -8,7 +8,6 @@ public class BulletGreen : Bullet
     {
         base.Awake();
         speed = 80f;
-        damage = 20;
-        coolingTime = 0.5f;
+        damage = 50;
     }
 }

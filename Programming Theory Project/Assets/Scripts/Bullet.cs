@@ -9,8 +9,7 @@ public abstract class Bullet : MonoBehaviour
     public ParticleSystem explosionEffect;
     protected float speed;
     protected int damage;
-    [SerializeField]
-    protected float coolingTime;
+    public float coolingTime = 2f;
     private Rigidbody rb;
     private Attack attack;
 
@@ -18,14 +17,6 @@ public abstract class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         attack = GetComponent<Attack>();
-    }
-
-    public float GetCoolingTime
-    {
-        get
-        {
-            return coolingTime;
-        }
     }
 
     public void ShootTowards(Transform target)
